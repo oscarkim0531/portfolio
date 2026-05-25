@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./style.css">
+    <title>Oscar Kim | Visual Design Portfolio 2026</title>
+</head>
+<body>
+
+    <div id="grid-overlay" aria-hidden="true"></div>
+
+    <header id="main-header">
+        <div class="header-inner">
+            <h1 class="logo">OscarKim</h1>
+            <nav id="main-nav">
+                <ul>
+                    <li><a href="#page-1" class="nav-link active">Home</a></li>
+                    <li><a href="#page-2" class="nav-link">Archive</a></li>
+                    <li><a href="#page-3" class="nav-link">Project</a></li>
+                </ul>
+            </nav>
+            <div class="meta-info">
+                <span class="year">2026</span>
+                <span class="category">Visual Designer</span>
+            </div>
+        </div>
+    </header>
+
+    <main id="portfolio-container">
+
+        <section id="page-1" class="section cover">
+            <div class="content-wrap">
+                <div class="text-block">
+                    <p class="role">Visual Designer</p>
+                    <h2 class="title">PORTFOLIO</h2>
+                    <p class="name">OscarKim</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-2" class="section archive">
+            <div class="section-header">
+                <span class="index">01</span>
+                <h3 class="category">Graphic Design</h3>
+            </div>
+            <div class="content-grid">
+                <div class="archive-item">
+                    <span class="item-number">3</span>
+                    <p class="item-title">Visual Designer OscarKim</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="page-3" class="section project-detail">
+            <article class="project-info">
+                <header class="project-title">
+                    <h2 class="main-title">문장 사이의 여백</h2>
+                    <p class="sub-title">전시회 포스터 디자인</p>
+                </header>
+
+                <div class="metadata-grid">
+                    <div class="meta-item">
+                        <span class="label">Client</span>
+                        <span class="value">독립출판 한쪽</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="label">Design</span>
+                        <span class="value">OscarKim</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="label">Category</span>
+                        <span class="value">Graphic Design</span>
+                    </div>
+                    <div class="meta-item">
+                        <span class="label">Year</span>
+                        <span class="value">2026</span>
+                    </div>
+                </div>
+
+                <div class="project-description">
+                    <p>나를 버리고 가시는 님은 십리도 못 가서 발병난다. 내가 그의 이름을 불러 주었을 때 그는 나에게로 와서 꽃이 되었다. 왜 사냐건 웃지요.</p>
+                    <p>관용은 미덕이다. 황금 보기를 돌같이 하라 뭉치면 살고 흩어지면 죽는다. 왜 사냐건 웃지요.</p>
+                </div>
+            </article>
+
+            <figure class="visual-assets">
+                <div class="asset-slot" data-label="餘"></div>
+                <div class="asset-slot" data-label="The Silence Between Lines"></div>
+                <div class="asset-slot" data-label="Poster Layout"></div>
+            </figure>
+        </section>
+
+    </main>
+
+    <footer id="main-footer">
+        <p class="copyright">&copy; 2026 OscarKim. All rights reserved.</p>
+        <p class="contact">@hanjok_books</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const sections = document.querySelectorAll('.section');
+            const navLinks = document.querySelectorAll('.nav-link');
+
+            /**
+             * 1. 스크롤 위치에 따른 네비게이션 활성화 (Scroll Spy)
+             */
+            const handleScroll = () => {
+                let current = "";
+                sections.forEach(section => {
+                    const sectionTop = section.offsetTop;
+                    const sectionHeight = section.clientHeight;
+                    if (pageYOffset >= sectionTop - sectionHeight / 3) {
+                        current = section.getAttribute("id");
+                    }
+                });
+
+                navLinks.forEach(link => {
+                    link.classList.remove("active");
+                    if (link.getAttribute("href").includes(current)) {
+                        link.classList.add("active");
+                    }
+                });
+            };
+
+            /**
+             * 2. 부드러운 스크롤 이동
+             */
+            navLinks.forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    document.querySelector(this.getAttribute('href')).scrollIntoView({
+                        behavior: 'smooth'
+                    });
+                });
+            });
+
+            window.addEventListener('scroll', handleScroll);
+
+            /**
+             * 3. 반응형 이미지/슬롯 로드 감지 (예시)
+             */
+            console.log("Visual Design Portfolio Framework Initialized.");
+            console.log("Grid System: Enabled (Logical)");
+        });
+    </script>
+</body>
+</html>

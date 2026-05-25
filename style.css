@@ -1,0 +1,205 @@
+/* [Root Variables] 디자인 시스템의 핵심 수치 정의 */
+:root {
+    --bg-color: #ffffff;
+    --text-primary: #000000;
+    --text-secondary: #666666;
+    --accent-color: #0000ff; /* 포인트 컬러 (필요 시 수정) */
+    --grid-gap: 20px;
+    --side-padding: 5vw;
+    --font-main: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+
+/* [Reset & Base] 기초 조형 설정 */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    -webkit-font-smoothing: antialiased;
+}
+
+body {
+    background-color: var(--bg-color);
+    color: var(--text-primary);
+    font-family: var(--font-main);
+    line-height: 1.5;
+    overflow-x: hidden;
+}
+
+/* [Layout] 그리드 컨테이너 */
+#portfolio-container {
+    padding: 0 var(--side-padding);
+}
+
+.section {
+    min-height: 100vh;
+    padding: 100px 0;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+/* [Header] 상단 내비게이션 - 정보의 위계 */
+#main-header {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    padding: 30px var(--side-padding);
+    background: rgba(255, 255, 255, 0.9);
+    z-index: 1000;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+}
+
+.header-inner {
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    width: 100%;
+    align-items: baseline;
+}
+
+#main-nav ul {
+    display: flex;
+    gap: 30px;
+    list-style: none;
+    justify-content: center;
+}
+
+.nav-link {
+    text-decoration: none;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    transition: color 0.3s;
+}
+
+.nav-link.active, .nav-link:hover {
+    color: var(--text-primary);
+    font-weight: bold;
+}
+
+/* [PAGE 1] Cover - 압도적인 여백과 타이포그래피 */
+.cover .title {
+    font-size: clamp(3rem, 15vw, 12rem);
+    font-weight: 900;
+    line-height: 0.9;
+    letter-spacing: -0.04em;
+    margin: 20px 0;
+}
+
+.cover .role, .cover .name {
+    font-size: 1.2rem;
+    text-transform: uppercase;
+}
+
+/* [PAGE 2] Archive - 구조적 리스트 */
+.archive .section-header {
+    display: flex;
+    align-items: baseline;
+    gap: 20px;
+    margin-bottom: 50px;
+}
+
+.archive .index { font-size: 3rem; font-weight: bold; }
+.archive .category { font-size: 1.5rem; text-transform: uppercase; }
+
+.content-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: var(--grid-gap);
+}
+
+.archive-item {
+    border-top: 2px solid var(--text-primary);
+    padding-top: 15px;
+}
+
+/* [PAGE 3] Project Detail - 논리적 근거에 기반한 레이아웃 */
+.project-detail .main-title {
+    font-size: 4rem;
+    margin-bottom: 10px;
+}
+
+.metadata-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin: 60px 0;
+    border-top: 1px solid var(--text-primary);
+    border-bottom: 1px solid var(--text-primary);
+    padding: 20px 0;
+}
+
+.meta-item .label {
+    display: block;
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    text-transform: uppercase;
+    margin-bottom: 5px;
+}
+
+.meta-item .value { font-weight: 500; }
+
+.project-description {
+    max-width: 600px;
+    margin-bottom: 80px;
+    column-count: 1; /* 추후 텍스트 양에 따라 2단 구성 가능 */
+}
+
+/* 시각적 에셋 슬롯 (Placeholder) */
+.visual-assets {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gap);
+}
+
+.asset-slot {
+    background: #f0f0f0;
+    min-height: 400px;
+    grid-column: span 6;
+    position: relative;
+}
+
+.asset-slot::after {
+    content: attr(data-label);
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-size: 0.8rem;
+    color: var(--text-secondary);
+}
+
+/* [Responsive] 반응형 브레이크포인트 */
+@media (max-width: 768px) {
+    .header-inner {
+        grid-template-columns: 1fr 1fr;
+    }
+    #main-nav { display: none; } /* 모바일은 햄버거 메뉴로 대체하거나 생략 */
+    
+    .metadata-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+    
+    .asset-slot {
+        grid-column: span 12;
+    }
+    
+    .project-detail .main-title {
+        font-size: 2.5rem;
+    }
+}
+
+/* [Utility] 그리드 가이드라인 (개발 시 확인용) */
+#grid-overlay {
+    position: fixed;
+    top: 0; left: var(--side-padding); right: var(--side-padding); bottom: 0;
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: var(--grid-gap);
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.05;
+}
+#grid-overlay div { background: red; height: 100%; }
